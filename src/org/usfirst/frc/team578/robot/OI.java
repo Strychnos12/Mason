@@ -1,8 +1,10 @@
 package org.usfirst.frc.team578.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-import org.usfirst.frc.team578.robot.commands.ExampleCommand;
+import org.usfirst.frc.team578.robot.commands.TurnMotorCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -36,4 +38,14 @@ public class OI {
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
+	
+	Joystick gamepad = new Joystick(RobotMap.GAMEPAD);
+	JoystickButton buttonSix = new JoystickButton(gamepad, 6);
+	
+	
+	public void initialize() {
+		buttonSix.whileHeld(new TurnMotorCommand());
+	}
+	
+	
 }
