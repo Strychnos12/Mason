@@ -13,8 +13,6 @@ public class MotorSubsystem extends Subsystem {
 
 	private CANTalon motorTalon;
 
-	private final double scaleFactor = 1;
-
 	public void initialize() {
 		motorTalon = new CANTalon(RobotMap.MOTOR_TALON);
 		motorTalon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
@@ -26,11 +24,11 @@ public class MotorSubsystem extends Subsystem {
 	}
 
 	public void spinForward() {
-		motorTalon.set(-1 * scaleFactor);
+		motorTalon.set(-.2);
 	}
 
 	public void spinBackwards() {
-		motorTalon.set(1 * scaleFactor);
+		motorTalon.set(.2);
 	}
 
 	public void spinStop() {

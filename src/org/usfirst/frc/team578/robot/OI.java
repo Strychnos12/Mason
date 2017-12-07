@@ -44,6 +44,8 @@ public class OI {
 	
 	
 	public void initialize() {
+		System.err.println("Init OI");
+//		buttonSix.whileHeld(new TurnMotorCommand());
 		buttonSix.whileHeld(new TurnMotorCommand());
 	}
 	

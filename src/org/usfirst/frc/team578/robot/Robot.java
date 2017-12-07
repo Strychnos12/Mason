@@ -1,14 +1,10 @@
 package org.usfirst.frc.team578.robot;
 
+import org.usfirst.frc.team578.robot.commands.TurnMotorCommand;
 import org.usfirst.frc.team578.robot.subsystems.MotorSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.SampleRobot;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
  * This is a demo program showing the use of the RobotDrive class. The
@@ -30,13 +26,31 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 	
 	public static MotorSubsystem motorSubsystem;
+	public static OI oi;
 
 	public Robot() {
 	}
 
 	@Override
 	public void robotInit() {
+		System.err.println("Robot Init");
 		motorSubsystem = new MotorSubsystem();
 		motorSubsystem.initialize();
+	
+		oi = new OI();
+		oi.initialize();
+	}
+	
+	@Override
+	public void teleopInit() {
+		System.err.println("Tele Init");
+//		TurnMotorCommand driveCommand = new TurnMotorCommand();
+//		driveCommand.start();
+	}
+	
+	@Override
+	public void teleopPeriodic() {
+//		System.err.println("Tele Period");
+		Scheduler.getInstance().run();		
 	}
 }
