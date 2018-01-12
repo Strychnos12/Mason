@@ -2,6 +2,7 @@ package org.usfirst.frc.team578.robot;
 
 import org.usfirst.frc.team578.robot.commands.TurnMotorCommand;
 import org.usfirst.frc.team578.robot.subsystems.MotorSubsystem;
+import org.usfirst.frc.team578.util.Gamepad;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -27,7 +28,8 @@ public class Robot extends IterativeRobot {
 	
 	public static MotorSubsystem motorSubsystem;
 	public static OI oi;
-
+	Gamepad f310 = new Gamepad(RobotMap.GAMEPAD);
+	
 	public Robot() {
 	}
 
@@ -51,6 +53,14 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 //		System.err.println("Tele Period");
+		
+		double leftX = f310.getLeftX();
+		double leftY = f310.getLeftY();
+		double rightX = f310.getRightX();
+		double rightY = f310.getRightY();
+		
+		System.err.println(String.format("%f %f %f %f",leftX, leftY, rightX, rightY));
+		
 		Scheduler.getInstance().run();		
 	}
 }

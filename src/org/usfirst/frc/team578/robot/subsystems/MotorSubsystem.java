@@ -3,6 +3,9 @@ package org.usfirst.frc.team578.robot.subsystems;
 import org.usfirst.frc.team578.robot.RobotMap;
 
 import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -11,12 +14,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class MotorSubsystem extends Subsystem {
 
-	private CANTalon motorTalon;
+	private WPI_TalonSRX motorTalon;
 
 	public void initialize() {
-		motorTalon = new CANTalon(RobotMap.MOTOR_TALON);
-		motorTalon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-		motorTalon.enable();
+		
+//		motorTalon.set(ControlMode.PercentOutput,0);
+		motorTalon = new WPI_TalonSRX(RobotMap.MOTOR_TALON);
+//		motorTalon.changeControlMode(WPI_TalonSRX.TalonControlMode.PercentVbus);
+//		motorTalon.enable();
 	}
 
 	@Override
@@ -24,7 +29,7 @@ public class MotorSubsystem extends Subsystem {
 	}
 
 	public void spinForward() {
-		motorTalon.set(-.2);
+		motorTalon.set(.1);
 	}
 
 	public void spinBackwards() {

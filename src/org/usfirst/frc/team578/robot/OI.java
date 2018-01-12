@@ -3,8 +3,10 @@ package org.usfirst.frc.team578.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team578.robot.commands.TurnMotorCommand;
+import org.usfirst.frc.team578.util.Gamepad;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -39,14 +41,17 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 	
-	Joystick gamepad = new Joystick(RobotMap.GAMEPAD);
-	JoystickButton buttonSix = new JoystickButton(gamepad, 6);
+//	Joystick gamepad = new Joystick(RobotMap.GAMEPAD);
+//	JoystickButton buttonSix = new JoystickButton(gamepad, 6);
+	
+	Gamepad f310 = new Gamepad(RobotMap.GAMEPAD);
+	JoystickButton rightShoulderButton = f310.getRightShoulder();
+
 	
 	
 	public void initialize() {
 		System.err.println("Init OI");
-//		buttonSix.whileHeld(new TurnMotorCommand());
-		buttonSix.whileHeld(new TurnMotorCommand());
+		rightShoulderButton.whileHeld(new TurnMotorCommand());	
 	}
 	
 	
