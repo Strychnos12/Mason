@@ -1,6 +1,7 @@
 package org.usfirst.frc.team578.robot;
 
 import org.usfirst.frc.team578.robot.commands.TurnMotorCommand;
+import org.usfirst.frc.team578.robot.subsystems.GyroSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.MotorSubsystem;
 import org.usfirst.frc.team578.util.Gamepad;
 
@@ -25,11 +26,12 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  * instead if you're new.
  */
 public class Robot extends IterativeRobot {
-	
+
 	public static MotorSubsystem motorSubsystem;
+	public static GyroSubsystem gyroSubsystem;
 	public static OI oi;
-	Gamepad f310 = new Gamepad(RobotMap.GAMEPAD);
-	
+//	Gamepad f310 = new Gamepad(RobotMap.GAMEPAD);
+
 	public Robot() {
 	}
 
@@ -38,29 +40,36 @@ public class Robot extends IterativeRobot {
 		System.err.println("Robot Init");
 		motorSubsystem = new MotorSubsystem();
 		motorSubsystem.initialize();
-	
+
+		gyroSubsystem = new GyroSubsystem();
+		gyroSubsystem.initialize();
+
 		oi = new OI();
 		oi.initialize();
 	}
-	
+
 	@Override
 	public void teleopInit() {
 		System.err.println("Tele Init");
-//		TurnMotorCommand driveCommand = new TurnMotorCommand();
-//		driveCommand.start();
+		gyroSubsystem.setToZero();
+		// TurnMotorCommand driveCommand = new TurnMotorCommand();
+		// driveCommand.start();
 	}
-	
+
 	@Override
 	public void teleopPeriodic() {
-//		System.err.println("Tele Period");
+		// System.err.println("Tele Period");
 		
-		double leftX = f310.getLeftX();
-		double leftY = f310.getLeftY();
-		double rightX = f310.getRightX();
-		double rightY = f310.getRightY();
+		System.err.println("Heading -> " + gyroSubsystem.getHeading());
 		
-		System.err.println(String.format("%f %f %f %f",leftX, leftY, rightX, rightY));
-		
-		Scheduler.getInstance().run();		
+//
+//		double leftX = f310.getLeftX();
+//		double leftY = f310.getLeftY();
+//		double rightX = f310.getRightX();
+//		double rightY = f310.getRightY();
+
+//		System.err.println(String.format("%f %f %f %f", leftX, leftY, rightX, rightY));
+
+		Scheduler.getInstance().run();
 	}
 }

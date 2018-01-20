@@ -44,14 +44,14 @@ public class OI {
 //	Joystick gamepad = new Joystick(RobotMap.GAMEPAD);
 //	JoystickButton buttonSix = new JoystickButton(gamepad, 6);
 	
-	Gamepad f310 = new Gamepad(RobotMap.GAMEPAD);
-	JoystickButton rightShoulderButton = f310.getRightShoulder();
+//	Gamepad f310 = new Gamepad(RobotMap.GAMEPAD);
+//	JoystickButton rightShoulderButton = f310.getRightShoulder();
 
 	
 	
 	public void initialize() {
 		System.err.println("Init OI");
-		rightShoulderButton.whileHeld(new TurnMotorCommand());	
+//		rightShoulderButton.whileHeld(new TurnMotorCommand());	
 	}
 	
 	
