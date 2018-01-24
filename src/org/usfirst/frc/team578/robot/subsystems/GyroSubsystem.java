@@ -28,7 +28,7 @@ public class GyroSubsystem extends Subsystem {
 		// double angle = Math.abs(navx.getAngle()) % 360;
 
 		double angle = navx.getFusedHeading();
-		System.err.println("H->" + angle);
+//		System.err.println("H->" + angle);
 
 		return angle;
 	}

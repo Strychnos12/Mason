@@ -19,5 +19,7 @@ public class RobotMap {
 	
 	public static final int GAMEPAD = 2;
 	
-	public static final int MOTOR_TALON = 2;
+	public static final int MOTOR_TALON = 7;
+
+//	public static final int ELEVATOR_TALON = -1;
 }
