@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 
+import org.usfirst.frc.team578.robot.commands.ResetEncoder;
 import org.usfirst.frc.team578.robot.commands.TurnMotorCommand;
 import org.usfirst.frc.team578.robot.commands.TurnMotorCommandBack;
 import org.usfirst.frc.team578.util.Gamepad;
@@ -41,21 +42,21 @@ public class OI {
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
-	
-//	Joystick gamepad = new Joystick(RobotMap.GAMEPAD);
-//	JoystickButton buttonSix = new JoystickButton(gamepad, 6);
-	
+
+	// Joystick gamepad = new Joystick(RobotMap.GAMEPAD);
+	// JoystickButton buttonSix = new JoystickButton(gamepad, 6);
+
 	Gamepad f310 = new Gamepad(RobotMap.GAMEPAD);
 	JoystickButton rightShoulderButton = f310.getRightShoulder();
 	JoystickButton leftShoulderButton = f310.getLeftShoulder();
+	JoystickButton buttonA = f310.getButtonA();
 
-	
-	
 	public void initialize() {
 		System.err.println("Init OI");
-		rightShoulderButton.whileHeld(new TurnMotorCommand());
-		leftShoulderButton.whileHeld(new TurnMotorCommandBack());	
+		rightShoulderButton.whenPressed(new TurnMotorCommand());
+		leftShoulderButton.whileHeld(new TurnMotorCommandBack());
+		buttonA.whenPressed(new ResetEncoder());
+
 	}
-	
-	
+
 }
