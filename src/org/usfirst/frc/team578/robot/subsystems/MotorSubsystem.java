@@ -40,13 +40,13 @@ public class MotorSubsystem extends Subsystem {
 		_talon.configPeakOutputReverse(-1, Constants.kTimeoutMs);
 		/* set closed loop gains in slot0 - see documentation */
 		_talon.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
-		_talon.config_kF(0, 0.2, Constants.kTimeoutMs);
-		_talon.config_kP(0, 0.2, Constants.kTimeoutMs);
+		_talon.config_kF(0, 0.455, Constants.kTimeoutMs);
+		_talon.config_kP(0, 0.455, Constants.kTimeoutMs);
 		_talon.config_kI(0, 0, Constants.kTimeoutMs);
 		_talon.config_kD(0, 0, Constants.kTimeoutMs);
 		/* set acceleration and vcruise velocity - see documentation */
-		_talon.configMotionCruiseVelocity(15000, Constants.kTimeoutMs);
-		_talon.configMotionAcceleration(6000, Constants.kTimeoutMs);
+		_talon.configMotionCruiseVelocity(1689, Constants.kTimeoutMs);
+		_talon.configMotionAcceleration(1689, Constants.kTimeoutMs);
 		/* zero the sensor */
 		_talon.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
 		
