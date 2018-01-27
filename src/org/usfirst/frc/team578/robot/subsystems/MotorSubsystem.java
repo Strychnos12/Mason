@@ -6,6 +6,8 @@ import com.ctre.CANTalon;
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.VelocityMeasPeriod;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -47,6 +49,11 @@ public class MotorSubsystem extends Subsystem {
 		_talon.configMotionAcceleration(6000, Constants.kTimeoutMs);
 		/* zero the sensor */
 		_talon.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+		
+		
+		_talon.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed, 0);
+		_talon.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed, 0);
+
 
 		// motorTalon.set(ControlMode.PercentOutput,0);
 
@@ -65,29 +72,56 @@ public class MotorSubsystem extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 	}
-
-	public void spinForward() {
-		// double c = motorTalon.getSensorCollection().getQuadratureVelocity();
-		// double b = motorTalon.getSensorCollection().getQuadraturePosition();
-		// double a = motorTalon.getSelectedSensorPosition(0);
-		// if (a <= -4096) {
-		// System.err.println("Stopping Motor " + a + " , " + b + " , " + c);
-		// motorTalon.set(0);
-		// } else {
-		// motorTalon.set(.5);
-		// System.err.println("Spin Forward " + a + " , " + b + " , " + c);
-		// }
-		double a = _talon.getSelectedSensorPosition(0);
-		System.err.println("Spin Forward " + a);
-		_talon.set(ControlMode.MotionMagic, 4096);
-
+	
+	public void moveToPosition(int position) {
+		
+		_talon.set(ControlMode.MotionMagic, position);
+		/* append more signals to print when in speed mode. */
+		
 	}
-
-	public void spinBackwards() {
-		_talon.set(-.5);
-		double a = _talon.getSelectedSensorPosition(0);
-		System.err.println("Spin Back " + a);
+	
+	public void driveMotor(double value) {
+		_talon.set(ControlMode.PercentOutput, value);
 	}
+	
+//	public boolean isMoveComplete(int position) {
+//		StringBuffer _sb = new StringBuffer();
+//		int pos = _talon.getSelectedSensorPosition(0);
+//		_sb.append("\terr:");
+//		_sb.append(_talon.getClosedLoopError(Constants.kPIDLoopIdx));
+//		_sb.append("trgt: " + pos  + "vel: ");
+//		_sb.append(_talon.getSelectedSensorVelocity(Constants.kPIDLoopIdx));
+//		return position == _talon.getSelectedSensorPosition(0);
+//	}
+
+
+//	public void spinForward() {
+//		// double c = motorTalon.getSensorCollection().getQuadratureVelocity();
+//		// double b = motorTalon.getSensorCollection().getQuadraturePosition();
+//		// double a = motorTalon.getSelectedSensorPosition(0);
+//		// if (a <= -4096) {
+//		// System.err.println("Stopping Motor " + a + " , " + b + " , " + c);
+//		// motorTalon.set(0);
+//		// } else {
+//		// motorTalon.set(.5);
+//		// System.err.println("Spin Forward " + a + " , " + b + " , " + c);
+//		// }
+//		double a = _talon.getSelectedSensorPosition(0);
+//		System.err.println("Spin Forward " + a);
+//		_talon.set(ControlMode.MotionMagic, 4096);
+//
+//	}
+//
+//	public void spinBackwards() {
+//		boolean fls = _talon.getSensorCollection().isFwdLimitSwitchClosed();
+//		boolean rls = _talon.getSensorCollection().isRevLimitSwitchClosed();
+//		
+//		System.err.println("fls " + fls + " rls " + rls);
+//		
+//		_talon.set(-.5);
+//		double a = _talon.getSelectedSensorPosition(0);
+//		System.err.println("Spin Back " + a);
+//	}
 
 	public void spinStop() {
 		_talon.set(0);
@@ -103,6 +137,6 @@ public class MotorSubsystem extends Subsystem {
 	}
 
 	public void resetEncoder() {
-		_talon.setSelectedSensorPosition(0, 0, 0);
+		_talon.set(ControlMode.MotionMagic, 0);
 	}
 }

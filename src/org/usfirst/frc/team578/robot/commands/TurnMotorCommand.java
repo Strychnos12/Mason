@@ -6,6 +6,9 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class TurnMotorCommand extends Command {
 
+//	boolean isFinished = false;
+//	boolean inCommand = false;
+
 	public TurnMotorCommand() {
 		System.err.println("Turn Motor Requires");
 		requires(Robot.motorSubsystem);
@@ -18,20 +21,31 @@ public class TurnMotorCommand extends Command {
 
 	@Override
 	protected void execute() {
-		System.err.println("TM Forward");
-		Robot.motorSubsystem.spinForward();
+		System.err.println("TM ");
+		// Robot.motorSubsystem.spinForward();
+		Robot.motorSubsystem.moveToPosition(4096 * 10);
+
+//		if (!inCommand) {
+//			
+//			inCommand = true;
+//		} else {
+//			if (Robot.motorSubsystem.isMoveComplete(4096)) {
+//				inCommand = false;
+//				isFinished = true;
+//			}
+//		}
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 
 	@Override
 	protected void end() {
-		
+
 	}
-	
+
 	@Override
 	public void interrupted() {
 		System.err.println("TM Interrupt");

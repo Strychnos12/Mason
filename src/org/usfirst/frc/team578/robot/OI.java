@@ -46,7 +46,7 @@ public class OI {
 	// Joystick gamepad = new Joystick(RobotMap.GAMEPAD);
 	// JoystickButton buttonSix = new JoystickButton(gamepad, 6);
 
-	Gamepad f310 = new Gamepad(RobotMap.GAMEPAD);
+	public static final Gamepad f310 = new Gamepad(RobotMap.GAMEPAD);
 	JoystickButton rightShoulderButton = f310.getRightShoulder();
 	JoystickButton leftShoulderButton = f310.getLeftShoulder();
 	JoystickButton buttonA = f310.getButtonA();

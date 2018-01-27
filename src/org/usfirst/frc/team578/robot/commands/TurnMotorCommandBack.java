@@ -18,13 +18,14 @@ public class TurnMotorCommandBack extends Command {
 
 	@Override
 	protected void execute() {
-		System.err.println("TM Forward");
-		Robot.motorSubsystem.spinBackwards();
+		System.err.println("TM Back");
+//		Robot.motorSubsystem.spinBackwards();
+		Robot.motorSubsystem.moveToPosition(0);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 
 	@Override

@@ -28,19 +28,21 @@ public class Robot extends IterativeRobot {
 	public static MotorSubsystem motorSubsystem;
 	public static GyroSubsystem gyroSubsystem;
 	public static OI oi;
+	
+	public boolean joystickInUse = false;
 
 	public Robot() {
 	}
 
 	@Override
 	public void robotInit() {
-//		System.err.println("Robot Init");
+		// System.err.println("Robot Init");
 		motorSubsystem = new MotorSubsystem();
 		motorSubsystem.initialize();
 
 		gyroSubsystem = new GyroSubsystem();
 		gyroSubsystem.initialize();
-		
+
 		oi = new OI();
 		oi.initialize();
 	}
@@ -56,19 +58,33 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		// System.err.println("Tele Period");
-		
-//		System.err.println("Heading -> " + gyroSubsystem.getHeading());
-		
-//
-//		double leftX = f310.getLeftX();
-//		double leftY = f310.getLeftY();
-//		double rightX = f310.getRightX();
-//		double rightY = f310.getRightY();
 
-//		System.err.println(String.format("%f %f %f %f", leftX, leftY, rightX, rightY));
-//		double a =  motorSubsystem.motorTalon.getSelectedSensorPosition(0);
-//		System.err.println("Spin Stop " + a);
+		// System.err.println("Heading -> " + gyroSubsystem.getHeading());
+
+		//
+		// double leftX = f310.getLeftX();
+		// double leftY = f310.getLeftY();
+		// double rightX = f310.getRightX();
+		// double rightY = f310.getRightY();
+
+		// System.err.println(String.format("%f %f %f %f", leftX, leftY, rightX,
+		// rightY));
+		// double a = motorSubsystem.motorTalon.getSelectedSensorPosition(0);
+		// System.err.println("Spin Stop " + a);
+
+		double leftX = OI.f310.getLeftX();
+		double leftY = OI.f310.getLeftY();
+
 		
+		if (Math.abs(leftX) > .05 || Math.abs(leftY) > .05) {
+			joystickInUse = true;
+			motorSubsystem.driveMotor(leftY);
+		} else if (joystickInUse){
+			joystickInUse = false;
+			motorSubsystem.spinStop();
+		}
+			
+
 		Scheduler.getInstance().run();
 	}
 }
