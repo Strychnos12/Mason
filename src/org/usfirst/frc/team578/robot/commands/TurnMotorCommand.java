@@ -8,9 +8,12 @@ public class TurnMotorCommand extends Command {
 
 //	boolean isFinished = false;
 //	boolean inCommand = false;
+	int target;
 
 	public TurnMotorCommand() {
-		System.err.println("Turn Motor Requires");
+		
+//		double cur = Robot.motorSubsystem._talon.getSelectedSensorPosition(0);
+		System.err.println("Turn Motor Requires : ");
 		requires(Robot.motorSubsystem);
 	}
 
@@ -21,19 +24,9 @@ public class TurnMotorCommand extends Command {
 
 	@Override
 	protected void execute() {
-		System.err.println("TM ");
-		// Robot.motorSubsystem.spinForward();
-		Robot.motorSubsystem.moveToPosition(4096 * 10);
-
-//		if (!inCommand) {
-//			
-//			inCommand = true;
-//		} else {
-//			if (Robot.motorSubsystem.isMoveComplete(4096)) {
-//				inCommand = false;
-//				isFinished = true;
-//			}
-//		}
+		this.target = Robot.motorSubsystem._talon.getSelectedSensorPosition(0) + (4096 * 2);
+		System.err.println("TM " + target);
+		Robot.motorSubsystem.moveToPosition(target);
 	}
 
 	@Override

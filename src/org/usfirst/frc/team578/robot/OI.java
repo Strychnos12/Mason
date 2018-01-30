@@ -54,7 +54,7 @@ public class OI {
 	public void initialize() {
 		System.err.println("Init OI");
 		rightShoulderButton.whenPressed(new TurnMotorCommand());
-		leftShoulderButton.whileHeld(new TurnMotorCommandBack());
+		leftShoulderButton.whenPressed(new TurnMotorCommandBack());
 		buttonA.whenPressed(new ResetEncoder());
 
 	}
