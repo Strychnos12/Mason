@@ -5,6 +5,7 @@ import org.usfirst.frc.team578.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.GyroSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.MotorSubsystem;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
@@ -30,6 +31,7 @@ public class Robot extends IterativeRobot {
 	public static DriveSubsystem driveSubsystem;
 	public static GyroSubsystem gyroSubsystem;
 	public static OI oi;
+	DigitalInput cubeInput;
 //	double maxv = 0;
 //	
 //	public boolean joystickInUse = false;
@@ -45,6 +47,8 @@ public class Robot extends IterativeRobot {
 
 		gyroSubsystem = new GyroSubsystem();
 		gyroSubsystem.initialize();
+		
+		cubeInput = new DigitalInput(0);
 
 		oi = new OI();
 		oi.initialize();
@@ -68,7 +72,7 @@ public class Robot extends IterativeRobot {
 //		System.err.println("FFGain : " + 1023/maxv + " 75%maxUL : " + (maxv * .75) + "");
 		// System.err.println("Tele Period");
 
-		 
+		 System.err.println("Cube : -> " + !cubeInput.get());
 
 		//
 		// double leftX = f310.getLeftX();
