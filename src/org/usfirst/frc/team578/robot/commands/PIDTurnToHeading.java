@@ -18,7 +18,7 @@ public class PIDTurnToHeading extends PIDCommand {
 	private static final double kI = 0.00;
 	private static final double kD = 0.075;
 
-	private final double kToleranceDegrees = 5.f;
+	private final double kToleranceDegrees = 1.0f;
 
 	private boolean hasRunReturnPidInputAtLeastOnce;
 
@@ -40,21 +40,25 @@ public class PIDTurnToHeading extends PIDCommand {
 
 	@Override
 	protected boolean isFinished() {
-		return this.getPIDController().onTarget() && hasRunReturnPidInputAtLeastOnce && Math.abs(Robot.gyroSubsystem.getRate()) <= 0.3;
+		return this.getPIDController().onTarget() && hasRunReturnPidInputAtLeastOnce
+				&& Math.abs(Robot.gyroSubsystem.getRate()) <= 0.3;
 	}
 
 	@Override
 	protected double returnPIDInput() {
 		if (!hasRunReturnPidInputAtLeastOnce)
 			hasRunReturnPidInputAtLeastOnce = true;
-		return Robot.gyroSubsystem.getHeading();
+
+		double heading = Robot.gyroSubsystem.getHeading();
+		System.err.println("H -> " + heading);
+		return heading;
 	}
 
 	@Override
 	protected void usePIDOutput(double output) {
-	
+
 		System.err.println("Drive : " + output);
-		
+
 		// Robot.driveSubsystem.(0, 0, output, Robot.driveSubsystem.getAngle());
 	}
 }

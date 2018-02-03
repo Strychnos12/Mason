@@ -1,14 +1,9 @@
 package org.usfirst.frc.team578.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
-
-import org.usfirst.frc.team578.robot.commands.ResetEncoder;
-import org.usfirst.frc.team578.robot.commands.TurnMotorCommand;
-import org.usfirst.frc.team578.robot.commands.TurnMotorCommandBack;
+import org.usfirst.frc.team578.robot.commands.PIDTurnToHeading;
 import org.usfirst.frc.team578.util.Gamepad;
+
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -53,9 +48,10 @@ public class OI {
 
 	public void initialize() {
 		System.err.println("Init OI");
-		rightShoulderButton.whenPressed(new TurnMotorCommand());
-		leftShoulderButton.whenPressed(new TurnMotorCommandBack());
-		buttonA.whenPressed(new ResetEncoder());
+		
+		rightShoulderButton.whenPressed(new PIDTurnToHeading(90));
+//		leftShoulderButton.whenPressed(new TurnMotorCommandBack());
+//		buttonA.whenPressed(new ResetEncoder());
 
 	}
 

@@ -1,5 +1,7 @@
 package org.usfirst.frc.team578.robot;
 
+import org.usfirst.frc.team578.robot.commands.PIDTurnToHeading;
+import org.usfirst.frc.team578.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.GyroSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.MotorSubsystem;
 
@@ -25,12 +27,12 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  */
 public class Robot extends IterativeRobot {
 
-	public static MotorSubsystem motorSubsystem;
+	public static DriveSubsystem driveSubsystem;
 	public static GyroSubsystem gyroSubsystem;
 	public static OI oi;
-	double maxv = 0;
-	
-	public boolean joystickInUse = false;
+//	double maxv = 0;
+//	
+//	public boolean joystickInUse = false;
 
 	public Robot() {
 	}
@@ -38,8 +40,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		// System.err.println("Robot Init");
-		motorSubsystem = new MotorSubsystem();
-		motorSubsystem.initialize();
+//		driveSubsystem = new DriveSubsystem();
+//		driveSubsystem.initialize();
 
 		gyroSubsystem = new GyroSubsystem();
 		gyroSubsystem.initialize();
@@ -59,14 +61,14 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		
-		double a = motorSubsystem._talon.getSelectedSensorPosition(0);
-		double v = motorSubsystem._talon.getSelectedSensorVelocity(0);
-		maxv = Math.max(v, maxv);
-		System.err.println("velo : " + v + " Maxv: " + maxv + " Encoder : " + a + " To Zero " + (0 - a) + " To 10x " + ((4096 * 10) - a));
-		System.err.println("FFGain : " + 1023/maxv + " 75%maxUL : " + (maxv * .75) + "");
+//		double a = motorSubsystem._talon.getSelectedSensorPosition(0);
+//		double v = motorSubsystem._talon.getSelectedSensorVelocity(0);
+//		maxv = Math.max(v, maxv);
+//		System.err.println("velo : " + v + " Maxv: " + maxv + " Encoder : " + a + " To Zero " + (0 - a) + " To 10x " + ((4096 * 10) - a));
+//		System.err.println("FFGain : " + 1023/maxv + " 75%maxUL : " + (maxv * .75) + "");
 		// System.err.println("Tele Period");
 
-		// System.err.println("Heading -> " + gyroSubsystem.getHeading());
+		 
 
 		//
 		// double leftX = f310.getLeftX();
@@ -79,17 +81,17 @@ public class Robot extends IterativeRobot {
 		// double a = motorSubsystem.motorTalon.getSelectedSensorPosition(0);
 		// System.err.println("Spin Stop " + a);
 
-		double leftX = OI.f310.getLeftX();
-		double leftY = OI.f310.getLeftY();
-
-		
-		if (Math.abs(leftX) > .05 || Math.abs(leftY) > .05) {
-			joystickInUse = true;
-			motorSubsystem.driveMotor(leftY);
-		} else if (joystickInUse){
-			joystickInUse = false;
-			motorSubsystem.spinStop();
-		}
+//		double leftX = OI.f310.getLeftX();
+//		double leftY = OI.f310.getLeftY();
+//
+//		
+//		if (Math.abs(leftX) > .05 || Math.abs(leftY) > .05) {
+//			joystickInUse = true;
+//			motorSubsystem.driveMotor(leftY);
+//		} else if (joystickInUse){
+//			joystickInUse = false;
+//			motorSubsystem.spinStop();
+//		}
 			
 
 		Scheduler.getInstance().run();

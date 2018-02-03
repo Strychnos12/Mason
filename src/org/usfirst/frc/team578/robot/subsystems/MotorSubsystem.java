@@ -42,7 +42,7 @@ public class MotorSubsystem extends Subsystem {
 		_talon.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
 		_talon.config_kF(0, 0.455, Constants.kTimeoutMs);
 		_talon.config_kP(0, 0.455, Constants.kTimeoutMs);
-		_talon.config_kI(0, 0, Constants.kTimeoutMs);
+		_talon.config_kI(0, 0.0, Constants.kTimeoutMs);
 		_talon.config_kD(0, 0, Constants.kTimeoutMs);
 		_talon.config_IntegralZone(0, 50, Constants.kTimeoutMs);
 		/* set acceleration and vcruise velocity - see documentation */
