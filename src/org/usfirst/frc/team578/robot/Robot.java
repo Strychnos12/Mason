@@ -1,34 +1,16 @@
 package org.usfirst.frc.team578.robot;
 
-import org.usfirst.frc.team578.robot.commands.PIDTurnToHeading;
 import org.usfirst.frc.team578.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.GyroSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.MotorSubsystem;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
-/**
- * This is a demo program showing the use of the RobotDrive class. The
- * SampleRobot class is the base of a robot application that will automatically
- * call your Autonomous and OperatorControl methods at the right time as
- * controlled by the switches on the driver station or the field controls.
- *
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the SampleRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory.
- *
- * WARNING: While it may look like a good choice to use for your code if you're
- * inexperienced, don't. Unless you know what you are doing, complex code will
- * be much more difficult under this system. Use IterativeRobot or Command-Based
- * instead if you're new.
- */
 public class Robot extends IterativeRobot {
 
-//	public static DriveSubsystem driveSubsystem;
+	public static MotorSubsystem ms;
+	public static DriveSubsystem driveSubsystem;
 	public static GyroSubsystem gyroSubsystem;
 	public static OI oi;
 //	DigitalInput cubeInput;
@@ -41,9 +23,12 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void robotInit() {
-		// System.err.println("Robot Init");
+		 System.err.println("Robot Init");
 //		driveSubsystem = new DriveSubsystem();
 //		driveSubsystem.initialize();
+		
+		ms = new MotorSubsystem();
+		ms.initialize();
 
 		gyroSubsystem = new GyroSubsystem();
 		gyroSubsystem.initialize();
@@ -64,6 +49,9 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopPeriodic() {
+		
+		
+//		System.err.println(OI.f310.getRightY());
 		
 //		double a = motorSubsystem._talon.getSelectedSensorPosition(0);
 //		double v = motorSubsystem._talon.getSelectedSensorVelocity(0);

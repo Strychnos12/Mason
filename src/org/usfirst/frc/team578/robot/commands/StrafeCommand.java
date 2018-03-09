@@ -8,38 +8,13 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class StrafeCommand extends Command {
 
-	/*
-	 * Workbench test this to see if creating left/right commands and cancelling
-	 * them via UI works Or need logic to read triggers / some kind of sync'd
-	 * mutex
-	 */
-
 	public StrafeCommand() {
 		requires(Robot.gyroSubsystem);
 	}
-
+	
 	public enum StrafeDir {
 		LEFT, RIGHT, STOP
 	}
-
-	// private static StrafeCommand sc = null;
-	//
-	// public static synchronized StrafeCommand create(StrafeDir dir) {
-	// if (sc == null) {
-	// System.err.println("Was Null");
-	// sc = new StrafeCommand();
-	// sc.direction = dir;
-	// } else {
-	// if (sc.isRunning()) {
-	// System.err.println("run " + dir);
-	// sc.end();
-	// } else {
-	// System.err.println("No run " + dir);
-	// sc.direction = dir;
-	// }
-	// }
-	// return sc;
-	// }
 
 	StrafeDir direction;
 
